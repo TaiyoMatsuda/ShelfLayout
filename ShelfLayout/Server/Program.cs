@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.ResponseCompression;
+using ShelfLayout.Server.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -6,6 +6,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
+
+builder.Services.AddTransient<IWeatherService, WeatherService>();
 
 var app = builder.Build();
 
