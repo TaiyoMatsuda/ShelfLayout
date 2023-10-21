@@ -1,16 +1,17 @@
 ﻿using ShelfLayout.Shared.Entities.Weather;
 
-namespace ShelfLayout.Server.Services
+namespace ShelfLayout.Server.Gateways.Weather
 {
-    public class WeatherService: IWeatherService
+    public class WeatherGateway: IWeatherGateway
     {
         private static readonly string[] Summaries = new[]
         {
         "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
         };
 
-        public IEnumerable<WeatherForecast> GetWeatherForecasts(){
-            
+        public IEnumerable<WeatherForecast> GetWeatherForecasts()
+        {
+
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast
             {
                 Date = DateTime.Now.AddDays(index),

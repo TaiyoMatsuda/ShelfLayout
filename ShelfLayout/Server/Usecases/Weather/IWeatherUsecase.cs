@@ -1,8 +1,8 @@
 ﻿using ShelfLayout.Shared.Entities.Weather;
 
-namespace ShelfLayout.Server.Services
+namespace ShelfLayout.Server.Usecases.Weather
 {
-    public interface IWeatherService
+    public interface IWeatherUsecase
     {
         IEnumerable<WeatherForecast> GetWeatherForecasts();
     }

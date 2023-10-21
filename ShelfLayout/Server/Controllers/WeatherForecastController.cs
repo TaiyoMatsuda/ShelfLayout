@@ -1,5 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
-using ShelfLayout.Server.Services;
+using ShelfLayout.Server.Usecases.Weather;
 using ShelfLayout.Shared.Entities.Weather;
 
 namespace ShelfLayout.Server.Controllers
@@ -8,9 +8,9 @@ namespace ShelfLayout.Server.Controllers
     [Route("[controller]")]
     public class WeatherForecastController : ControllerBase
     {
-        private readonly IWeatherService _weatherService;
+        private readonly IWeatherUsecase _weatherService;
 
-        public WeatherForecastController(IWeatherService weatherService)
+        public WeatherForecastController(IWeatherUsecase weatherService)
         {
             _weatherService = weatherService;
         }
