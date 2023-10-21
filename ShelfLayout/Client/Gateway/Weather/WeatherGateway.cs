@@ -1,13 +1,13 @@
-﻿using ShelfLayout.Shared;
+﻿using ShelfLayout.Shared.Entities.Weather;
 using System.Net.Http.Json;
 
-namespace ShelfLayout.Client.Managers.Weather
+namespace ShelfLayout.Client.Gateway.Weather
 {
-    public class WeatherManager: IWeatherManager
+    public class WeatherGateway : IWeatherGateway
     {
         private readonly HttpClient _httpClient;
 
-        public WeatherManager(HttpClient httpClient)
+        public WeatherGateway(HttpClient httpClient)
         {
             _httpClient = httpClient;
         }

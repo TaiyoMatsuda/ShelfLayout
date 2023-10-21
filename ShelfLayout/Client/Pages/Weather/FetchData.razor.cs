@@ -1,19 +1,35 @@
 ﻿using Microsoft.AspNetCore.Components;
-using ShelfLayout.Client.Managers.Weather;
-using ShelfLayout.Shared;
+using ShelfLayout.Client.Presenters.Weather;
+using ShelfLayout.Shared.Entities;
+using ShelfLayout.Shared.Entities.Weather;
 
 namespace ShelfLayout.Client.Pages.Weather
 {
     public partial class FetchData
     {
-        private WeatherForecast[]? forecasts;
+        private WeatherForecast[]? _forecasts;
         
+        private DisposableList _disposables = new();
+
         [Inject]
-        private IWeatherManager _weatherManager { set; get; }
-        
+        private IWeatherPresenter _presenter { get; set; }
+
         protected override async Task OnInitializedAsync()
         {
-            forecasts = await _weatherManager.GetAllAsync();
+            await _presenter.GetAllAsync();
+
+            var disposable = _presenter.Forecasts.Subscribe((x) =>
+            {
+                _forecasts = x;
+                StateHasChanged();
+            });
+
+            _disposables.Add(disposable);
+        }
+
+        public void Dispose()
+        {
+            _disposables.DisposeAll();
         }
     }
 }

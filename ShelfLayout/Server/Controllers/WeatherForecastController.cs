@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using ShelfLayout.Server.Services;
-using ShelfLayout.Shared;
+using ShelfLayout.Shared.Entities.Weather;
 
 namespace ShelfLayout.Server.Controllers
 {
