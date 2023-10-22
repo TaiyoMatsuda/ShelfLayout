@@ -1,4 +1,4 @@
-﻿using ShelfLayout.Shared.Entities.Counter;
+﻿using ShelfLayout.Shared.Entities.View.Counter;
 
 namespace ShelfLayout.Client.Gateway.Counter
 {

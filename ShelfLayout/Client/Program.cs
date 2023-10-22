@@ -3,10 +3,13 @@ using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using MudBlazor.Services;
 using ShelfLayout.Client;
 using ShelfLayout.Client.Gateway.Counter;
+using ShelfLayout.Client.Gateway.Shelf;
 using ShelfLayout.Client.Gateway.Weather;
 using ShelfLayout.Client.Presenters.Counter;
+using ShelfLayout.Client.Presenters.Shelf;
 using ShelfLayout.Client.Presenters.Weather;
 using ShelfLayout.Client.Usecases.Counter;
+using ShelfLayout.Client.Usecases.Shelf;
 using ShelfLayout.Client.Usecases.Weather;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
@@ -19,12 +22,15 @@ builder.Services.AddMudServices();
 
 builder.Services.AddTransient<IWeatherPresenter, WeatherPresenter>();
 builder.Services.AddTransient<ICounterPresenter, CounterPresenter>();
+builder.Services.AddTransient<IShelfPresenter, ShelfPresenter>();
 
 builder.Services.AddTransient<ICounterUsecase, CounterUsecase>();
 builder.Services.AddTransient<IWeatherUsecase, WeatherUsecase>();
+builder.Services.AddTransient<IShelfUsecase, ShelfUsecase>();
 
 builder.Services.AddTransient<ICounterGateway, CounterGateway>();
 builder.Services.AddTransient<IWeatherGateway, WeatherGateway>();
+builder.Services.AddTransient<ICabinetGateway, CabinetGateway>();
 
 
 await builder.Build().RunAsync();

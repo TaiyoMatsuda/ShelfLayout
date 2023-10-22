@@ -1,4 +1,4 @@
-namespace ShelfLayout.Shared.Entities.Weather
+namespace ShelfLayout.Shared.Entities.View.Weather
 {
     public class WeatherForecast
     {

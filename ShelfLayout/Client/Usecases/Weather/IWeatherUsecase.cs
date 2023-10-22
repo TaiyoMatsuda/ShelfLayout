@@ -1,5 +1,5 @@
 ﻿using ShelfLayout.Shared.Entities.Observable;
-using ShelfLayout.Shared.Entities.Weather;
+using ShelfLayout.Shared.Entities.View.Weather;
 
 namespace ShelfLayout.Client.Usecases.Weather
 {

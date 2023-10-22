@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
 using ShelfLayout.Client.Presenters.Weather;
 using ShelfLayout.Shared.Entities;
-using ShelfLayout.Shared.Entities.Weather;
+using ShelfLayout.Shared.Entities.View.Weather;
 
 namespace ShelfLayout.Client.Pages.Weather
 {

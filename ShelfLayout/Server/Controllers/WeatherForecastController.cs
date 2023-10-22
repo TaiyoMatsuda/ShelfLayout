@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using ShelfLayout.Server.Usecases.Weather;
-using ShelfLayout.Shared.Entities.Weather;
+using ShelfLayout.Shared.Entities.View.Weather;
 
 namespace ShelfLayout.Server.Controllers
 {

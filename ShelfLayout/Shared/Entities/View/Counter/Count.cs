@@ -1,4 +1,4 @@
-﻿namespace ShelfLayout.Shared.Entities.Counter
+﻿namespace ShelfLayout.Shared.Entities.View.Counter
 {
     public class Count
     {

@@ -1,4 +1,4 @@
-﻿using ShelfLayout.Shared.Entities.Weather;
+﻿using ShelfLayout.Shared.Entities.View.Weather;
 
 namespace ShelfLayout.Server.Gateways.Weather
 {

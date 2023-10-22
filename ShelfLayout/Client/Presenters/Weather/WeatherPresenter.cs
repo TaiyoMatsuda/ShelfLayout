@@ -1,7 +1,7 @@
 ﻿using ShelfLayout.Client.Usecases.Weather;
 using ShelfLayout.Shared.Entities;
 using ShelfLayout.Shared.Entities.Observable;
-using ShelfLayout.Shared.Entities.Weather;
+using ShelfLayout.Shared.Entities.View.Weather;
 
 namespace ShelfLayout.Client.Presenters.Weather
 {
