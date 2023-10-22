@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
+using MudBlazor.Services;
 using ShelfLayout.Client;
 using ShelfLayout.Client.Gateway.Counter;
 using ShelfLayout.Client.Gateway.Weather;
@@ -13,6 +14,8 @@ builder.RootComponents.Add<App>("#app");
 builder.RootComponents.Add<HeadOutlet>("head::after");
 
 builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
+
+builder.Services.AddMudServices();
 
 builder.Services.AddTransient<IWeatherPresenter, WeatherPresenter>();
 builder.Services.AddTransient<ICounterPresenter, CounterPresenter>();

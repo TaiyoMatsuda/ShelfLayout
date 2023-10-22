@@ -7,8 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Include="wwwroot\images\tractor.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="6.0.15" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="6.0.15" PrivateAssets="all" />
+    <PackageReference Include="MudBlazor" Version="6.11.0" />
     <PackageReference Include="System.Reactive" Version="6.0.0" />
   </ItemGroup>
 
