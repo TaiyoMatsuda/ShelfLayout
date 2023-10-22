@@ -1,4 +1,6 @@
+using ShelfLayout.Server.Gateways.Shelf;
 using ShelfLayout.Server.Gateways.Weather;
+using ShelfLayout.Server.Usecases.Shelf;
 using ShelfLayout.Server.Usecases.Weather;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,8 +11,10 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
 
 builder.Services.AddTransient<IWeatherUsecase, WeatherUsecase>();
+builder.Services.AddTransient<IShelfUsecase, ShelfUsecase>();
 
 builder.Services.AddTransient<IWeatherGateway, WeatherGateway>();
+builder.Services.AddTransient<IShelfGateway, ShelfGateway>();
 
 var app = builder.Build();
 
