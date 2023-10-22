@@ -1,8 +1,8 @@
 ﻿using ShelfLayout.Shared.Entities.View.Weather;
 
-namespace ShelfLayout.Server.Gateways.Weather
+namespace ShelfLayout.Server.Repositorys.Weather
 {
-    public class WeatherGateway: IWeatherGateway
+    public class WeatherRepository: IWeatherRepository
     {
         private static readonly string[] Summaries = new[]
         {

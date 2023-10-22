@@ -1,22 +1,35 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using ShelfLayout.Server.Gateways.Shelf;
+using ShelfLayout.Server.Repositorys.Shelf;
 using ShelfLayout.Shared.Entities.Response.Shelf;
 
 namespace ShelfLayout.Server.Usecases.Shelf
 {
     public class ShelfUsecase: IShelfUsecase
     {
-        private readonly IShelfGateway _gateway;
+        private readonly IShelfRepository _repository;
 
-        public ShelfUsecase(IShelfGateway gateway)
+        public ShelfUsecase(IShelfRepository _repository)
         {
-            _gateway = gateway;
+            _repository = _repository;
         }
 
-        public async Task<ActionResult<CabinetResponse>> GetCabinet()
+        public async Task<List<CabinetResponse>> GetCabinet()
         {
-            var res = await _gateway.GetCabinet();
-            return res;
+            var cabinets = await _repository.GetCabinet();
+
+            var cabinetsResponses = new List<CabinetResponse>();
+            //autoMapperを使用するべき
+            cabinets.ForEach(x =>
+            {
+                var cabinetsResponse = new CabinetResponse()
+                {
+                    Id = x.Id,
+                    PositionX = x.PositionX,
+                    PositionY = x.PositionY,
+                    PositionZ = x.PositionZ,
+                };
+            });
+            return cabinetsResponses;
         }
     }
 }

@@ -5,6 +5,6 @@ namespace ShelfLayout.Server.Usecases.Shelf
 {
     public interface IShelfUsecase
     {
-        Task<ActionResult<CabinetResponse>> GetCabinet();
+        Task<List<CabinetResponse>> GetCabinet();
     }
 }

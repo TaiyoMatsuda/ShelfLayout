@@ -1,13 +1,13 @@
-﻿using ShelfLayout.Server.Gateways.Weather;
+﻿using ShelfLayout.Server.Repositorys.Weather;
 using ShelfLayout.Shared.Entities.View.Weather;
 
 namespace ShelfLayout.Server.Usecases.Weather
 {
     public class WeatherUsecase : IWeatherUsecase
     {
-        private readonly IWeatherGateway _gateway;
+        private readonly IWeatherRepository _gateway;
 
-        public WeatherUsecase(IWeatherGateway gateway)
+        public WeatherUsecase(IWeatherRepository gateway)
         {
             _gateway = gateway;
         }
