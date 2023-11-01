@@ -14,13 +14,13 @@ namespace ShelfLayout.Client.Gateway.Shelf
             _httpClient = httpClient;
         }
 
-        public async Task<CabinetResponse> GetAsync()
+        public async Task<List<CabinetResponse>> GetAsync()
         {
             var res = await _httpClient.GetAsync("api/shelf");
             if (res.IsSuccessStatusCode)
             {
                 var jsonString = await res.Content.ReadAsStringAsync();
-                return JsonSerializer.Deserialize<CabinetResponse>(jsonString);
+                return JsonSerializer.Deserialize<List<CabinetResponse>>(jsonString);
             }
             else
             {
