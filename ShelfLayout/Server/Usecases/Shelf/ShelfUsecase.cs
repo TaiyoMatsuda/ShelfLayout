@@ -8,9 +8,9 @@ namespace ShelfLayout.Server.Usecases.Shelf
     {
         private readonly IShelfRepository _repository;
 
-        public ShelfUsecase(IShelfRepository _repository)
+        public ShelfUsecase(IShelfRepository repository)
         {
-            _repository = _repository;
+            _repository = repository;
         }
 
         public async Task<List<CabinetResponse>> GetCabinet()
