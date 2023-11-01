@@ -21,17 +21,17 @@ namespace ShelfLayout.Client.Usecases.Shelf
 
         public async Task GetAsync()
         {
-            var cabinet = await _gateway.GetAsync();
+            var cabinets = await _gateway.GetAsync();
 
             var lanes = new List<LaneView>();
 
             var result = new CabinetView()
             {
-                Id = cabinet.Id,
-                PositionX = cabinet.PositionX,
-                PositionY = cabinet.PositionY,
-                PositionZ = cabinet.PositionZ,
-                Lanes = lanes
+                //Id = cabinet.Id,
+                //PositionX = cabinet.PositionX,
+                //PositionY = cabinet.PositionY,
+                //PositionZ = cabinet.PositionZ,
+                //Lanes = lanes
             };
 
             _cabinet.Notify(result);
