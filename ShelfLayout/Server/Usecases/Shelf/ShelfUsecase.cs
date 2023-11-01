@@ -28,6 +28,7 @@ namespace ShelfLayout.Server.Usecases.Shelf
                     PositionY = x.PositionY,
                     PositionZ = x.PositionZ,
                 };
+                cabinetsResponses.Add(cabinetsResponse);
             });
             return cabinetsResponses;
         }
