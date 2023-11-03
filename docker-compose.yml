@@ -7,6 +7,8 @@ services:
     build:
       context: .
       dockerfile: ShelfLayout/Server/Dockerfile
+    environment:
+      - "ConnectionStrings__DefaultConnection=Server=sqlserver;Database=master;User Id=sa;Password=saPassword1234;Encrypt=False"
     depends_on:
       - db
   db:

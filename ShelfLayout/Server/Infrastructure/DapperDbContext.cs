@@ -8,7 +8,7 @@ namespace ShelfLayout.Server.Infrastructure
 
         public DapperDbContext(IConfiguration configuration)
         {
-            _connectionString = configuration.GetConnectionString("connection"); ;
+            _connectionString = configuration.GetConnectionString("DefaultConnection"); ;
         }
 
         public SqlConnection CreateConnection() => new SqlConnection(_connectionString);
