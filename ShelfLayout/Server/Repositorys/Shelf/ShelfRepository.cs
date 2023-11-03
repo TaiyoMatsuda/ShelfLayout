@@ -1,8 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using ShelfLayout.Shared.Entities.Response.Shelf;
-using Microsoft.Data.SqlClient;
+﻿using Dapper;
 using ShelfLayout.Server.Infrastructure;
-using Dapper;
 using ShelfLayout.Shared.Entities.Repository;
 
 namespace ShelfLayout.Server.Repositorys.Shelf
@@ -16,44 +13,56 @@ namespace ShelfLayout.Server.Repositorys.Shelf
             _dbContext = dbContext;
         }
 
-        public async Task<List<Cabinet>> GetCabinet()
+        public async Task<List<UnitCabinet>> GetCabinet()
         {
-            List<Cabinet> products = null;
+            var result = new List<UnitCabinet>();
             using (var connection = _dbContext.CreateConnection())
             {
                 await connection.OpenAsync();
 
                 var sql = @"
-                    SELECT * FROM Cabinet ca
-                    LEFT JOIN CabinetRow cr ON ca.id = cr.cabinet_id
-                    LEFT JOIN CabinetRowLane crl ON cr.id = crl.cabinet_row_id
+                    SELECT 
+                        ca.id AS CabinetId,
+                        ca.store_id As StoreId,
+                        ca.position_x AS CabinetPositionX,
+                        ca.position_y As CabinetPositionY,
+                        ca.position_z AS CabinetPositionZ,
+                        ca.size_x As CabinetSizeX,
+                        ca.size_y AS CabinetSizeY,
+                        ca.size_z As CabinetSizeZ,
+                        cr.id AS CabinetRowId,
+                        cr.row_num As RowNum,
+                        cr.position_z AS RowPositionZ,
+                        cr.size_z As RowSizeZ,
+                        crl.id AS CabinetRowLaneId,
+                        crl.lane_num As LaneNum,
+                        crl.quantity As Quantity,
+                        crl.position_x AS CabinetRowLanePositionX,
+                        pr.jan_code AS JanCode,
+                        pr.name AS ProductName,
+                        pr.volume AS ProductVolume,
+                        pr.size_x AS ProductSizeX,
+                        pr.size_y AS ProductSizeY,
+                        pr.size_z AS ProductSizeZ,
+                        pr.image_url AS ProductImageUrl
+                    FROM Cabinet ca
+                    INNER JOIN CabinetRow cr ON ca.id = cr.cabinet_id
+                    INNER JOIN CabinetRowLane crl ON cr.id = crl.cabinet_row_id
+                    INNER JOIN Product pr ON pr.jan_code = crl.jan_code
+                    WHERE
+                        cr.Disabled = 0
+                        AND crl.Disabled = 0
+                        AND pr.Disabled = 0;
                 ";
 
-                products = (await connection.QueryAsync<Cabinet, List<CabinetRow>, List<CabinetRowLane>, Cabinet>(
-                    sql,
-                    (cabinet, cabinetRows, cabinetRowLanes) =>
-                    {
-                        if (cabinetRows != null && cabinetRows.Count > 0)
-                        {
-                            cabinet.CabinetRows = cabinetRows;
+                var queryResult = await connection.QueryAsync<UnitCabinet>(sql);
 
-                            foreach (var row in cabinet.CabinetRows)
-                            {
-                                if (cabinetRowLanes != null && cabinetRowLanes.Count > 0)
-                                {
-                                    row.CabinetRows = cabinetRowLanes;
-                                }
-                            }
-                        }
-                        return cabinet;
-                    },
-                    splitOn: "id, id"
-                )).ToList();
+                result = queryResult.ToList();
 
                 await connection.CloseAsync();
             }
 
-            return products;
+            return result;
         }
     }
 }

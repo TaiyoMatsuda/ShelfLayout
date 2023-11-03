@@ -4,6 +4,6 @@ namespace ShelfLayout.Server.Repositorys.Shelf
 {
     public interface IShelfRepository
     {
-        Task<List<Cabinet>> GetCabinet();
+        Task<List<UnitCabinet>> GetCabinet();
     }
 }

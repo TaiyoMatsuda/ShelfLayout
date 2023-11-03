@@ -23,10 +23,10 @@ namespace ShelfLayout.Server.Usecases.Shelf
             {
                 var cabinetsResponse = new CabinetResponse()
                 {
-                    Id = x.Id,
-                    PositionX = x.PositionX,
-                    PositionY = x.PositionY,
-                    PositionZ = x.PositionZ,
+                    //Id = x.Id,
+                    //PositionX = x.PositionX,
+                    //PositionY = x.PositionY,
+                    //PositionZ = x.PositionZ,
                 };
                 cabinetsResponses.Add(cabinetsResponse);
             });
