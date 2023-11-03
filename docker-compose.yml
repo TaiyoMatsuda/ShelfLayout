@@ -24,3 +24,13 @@ services:
       - "1433:1433"
     volumes:
       - ./ShelfLayout/Shared/init-db.sql:/initdb/init-db.sql
+    command:
+      - /bin/bash
+      - -c
+      - |
+        /opt/mssql/bin/sqlservr &
+        while ! /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P "saPassword1234" -Q "SELECT 1" > /dev/null 2>&1; do
+          sleep 1
+        done
+        /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P "saPassword1234" -i /initdb/init-db.sql
+        wait
