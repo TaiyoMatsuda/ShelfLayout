@@ -21,7 +21,15 @@ namespace ShelfLayout.Server.Repositorys.Shelf
             List<Cabinet> products = null;
             using (var connection = _dbContext.CreateConnection())
             {
-                await connection.OpenAsync();
+                try
+                {
+
+                    await connection.OpenAsync();
+                }
+                catch(Exception ex)
+                {
+
+                }
 
                 var sql = @"
                     SELECT * FROM Cabinet ca
