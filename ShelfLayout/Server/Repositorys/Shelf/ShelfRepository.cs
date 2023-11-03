@@ -21,22 +21,13 @@ namespace ShelfLayout.Server.Repositorys.Shelf
             List<Cabinet> products = null;
             using (var connection = _dbContext.CreateConnection())
             {
-                try
-                {
-
-                    await connection.OpenAsync();
-                }
-                catch(Exception ex)
-                {
-
-                }
+                await connection.OpenAsync();
 
                 var sql = @"
                     SELECT * FROM Cabinet ca
                     LEFT JOIN CabinetRow cr ON ca.id = cr.cabinet_id
                     LEFT JOIN CabinetRowLane crl ON cr.id = crl.cabinet_row_id
                 ";
-                //DB接続
 
                 products = (await connection.QueryAsync<Cabinet, List<CabinetRow>, List<CabinetRowLane>, Cabinet>(
                     sql,

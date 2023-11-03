@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 using MudBlazor;
 using ShelfLayout.Client.Presenters.Shelf;
-using ShelfLayout.Client.Presenters.Weather;
 using ShelfLayout.Shared.Entities;
 using ShelfLayout.Shared.Entities.View.ShelfLayout;
 
