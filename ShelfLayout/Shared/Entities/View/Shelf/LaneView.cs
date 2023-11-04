@@ -8,7 +8,7 @@
         
         public short LaneNumber { get; set; }
 
-        public ProductView Product { get; set; }
+        public ProductView Product { get; set; } = new ProductView();
 
         public short Quantity { get; set; }
     }

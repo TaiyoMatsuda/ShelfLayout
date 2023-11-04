@@ -4,6 +4,6 @@ namespace ShelfLayout.Client.Gateway.Shelf
 {
     public interface ICabinetGateway
     {
-        Task<List<CabinetResponse>> GetAsync();
+        Task<List<CabinetResponse>> GetAsync(int storeId, int cabinetId);
     }
 }

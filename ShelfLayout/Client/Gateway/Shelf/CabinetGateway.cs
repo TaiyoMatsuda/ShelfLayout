@@ -1,8 +1,6 @@
 ﻿using ShelfLayout.Shared.Entities.Response.Shelf;
 using System.Text.Json;
 
-
-
 namespace ShelfLayout.Client.Gateway.Shelf
 {
     public class CabinetGateway: ICabinetGateway
@@ -14,9 +12,9 @@ namespace ShelfLayout.Client.Gateway.Shelf
             _httpClient = httpClient;
         }
 
-        public async Task<List<CabinetResponse>> GetAsync()
+        public async Task<List<CabinetResponse>> GetAsync(int storeId, int cabinetId)
         {
-            var res = await _httpClient.GetAsync("api/shelf");
+            var res = await _httpClient.GetAsync($"api/shelf?storeId={storeId}&cabinetId={cabinetId}");
             if (res.IsSuccessStatusCode)
             {
                 var jsonString = await res.Content.ReadAsStringAsync();

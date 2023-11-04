@@ -1,5 +1,9 @@
 ﻿using AutoMapper;
-
+using ShelfLayout.Shared.Entities.Response;
+using ShelfLayout.Shared.Entities.Response.Shelf;
+using ShelfLayout.Shared.Entities.View;
+using ShelfLayout.Shared.Entities.View.Shelf;
+using ShelfLayout.Shared.Entities.View.ShelfLayout;
 
 namespace ShelfLayout.Shared.Profiles
 {
@@ -7,6 +11,9 @@ namespace ShelfLayout.Shared.Profiles
     {
         public ShelfProfile()
         {
+            CreateMap<CabinetResponse, CabinetView>();
+            CreateMap<LaneResponse, LaneView>();
+            CreateMap<ProductResponse, ProductView>();
         }
     }
 }

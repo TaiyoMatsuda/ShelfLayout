@@ -13,7 +13,7 @@ namespace ShelfLayout.Server.Repositorys.Shelf
             _dbContext = dbContext;
         }
 
-        public async Task<List<UnitCabinet>> GetCabinet()
+        public async Task<List<UnitCabinet>> GetCabinet(int storeId, int cabinetId)
         {
             var result = new List<UnitCabinet>();
             using (var connection = _dbContext.CreateConnection())
@@ -50,13 +50,16 @@ namespace ShelfLayout.Server.Repositorys.Shelf
                     INNER JOIN CabinetRowLane crl ON cr.id = crl.cabinet_row_id
                     INNER JOIN Product pr ON pr.jan_code = crl.jan_code
                     WHERE
-                        cr.Disabled = 0
+                        ca.Disabled = 0
+                        AND cr.Disabled = 0
                         AND crl.Disabled = 0
-                        AND pr.Disabled = 0;
+                        AND pr.Disabled = 0
+                        AND ca.store_id = @store_id
+                        AND ca.id = @cabinet_id;
                 ";
 
-                var queryResult = await connection.QueryAsync<UnitCabinet>(sql);
-
+                var queryResult = await connection.QueryAsync<UnitCabinet>(sql, 
+                    new { store_id = storeId, cabinet_id = cabinetId });
                 result = queryResult.ToList();
 
                 await connection.CloseAsync();

@@ -30,7 +30,7 @@ namespace ShelfLayout.Client.Presenters.Shelf
 
         public async Task GetAsync()
         {
-            await _usecase.GetAsync();
+            await _usecase.GetAsync(1,1);
         }
     }
 }

@@ -1,7 +1,8 @@
-﻿using ShelfLayout.Client.Gateway.Shelf;
+﻿using AutoMapper;
+using ShelfLayout.Client.Gateway.Shelf;
 using ShelfLayout.Shared.Entities.Observable;
-using ShelfLayout.Shared.Entities.View.Shelf;
 using ShelfLayout.Shared.Entities.View.ShelfLayout;
+using ShelfLayout.Shared.Profiles;
 
 namespace ShelfLayout.Client.Usecases.Shelf
 {
@@ -11,29 +12,26 @@ namespace ShelfLayout.Client.Usecases.Shelf
         private readonly PropertyObservable<CabinetView> _cabinet;
 
         private readonly ICabinetGateway _gateway;
+        private readonly IMapper _mapper;
 
         public ShelfUsecase(ICabinetGateway gateway)
         {
             _gateway = gateway;
 
             _cabinet = new(new());
+
+            var mapperConfig = new MapperConfiguration(mc =>
+            {
+                mc.AddProfile(new ShelfProfile());
+            });
+             _mapper = mapperConfig.CreateMapper();
         }
 
-        public async Task GetAsync()
+        public async Task GetAsync(int storeId, int cabinetId)
         {
-            var cabinets = await _gateway.GetAsync();
-
-            var lanes = new List<LaneView>();
-
-            var result = new CabinetView()
-            {
-                //Id = cabinet.Id,
-                //PositionX = cabinet.PositionX,
-                //PositionY = cabinet.PositionY,
-                //PositionZ = cabinet.PositionZ,
-                //Lanes = lanes
-            };
-
+            var cabinets = await _gateway.GetAsync(storeId, cabinetId);
+            var cabinet = cabinets.FirstOrDefault();
+            var result = _mapper.Map<CabinetView>(cabinet);
             _cabinet.Notify(result);
         }
     }

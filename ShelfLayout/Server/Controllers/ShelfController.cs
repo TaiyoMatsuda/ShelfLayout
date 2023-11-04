@@ -16,9 +16,9 @@ namespace ShelfLayout.Server.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<CabinetResponse>> GetCabinet()
+        public async Task<ActionResult<CabinetResponse>> GetCabinet(int storeId, int cabinetId)
         {
-            var response = await _usecase.GetCabinet();
+            var response = await _usecase.GetCabinet(storeId, cabinetId);
             return Ok(response);
         }
     }

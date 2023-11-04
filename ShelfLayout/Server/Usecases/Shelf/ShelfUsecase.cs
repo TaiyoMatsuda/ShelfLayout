@@ -13,9 +13,9 @@ namespace ShelfLayout.Server.Usecases.Shelf
             _repository = repository;
         }
 
-        public async Task<List<CabinetResponse>> GetCabinet()
+        public async Task<List<CabinetResponse>> GetCabinet(int storeId, int cabinetId)
         {
-            var unitCabinets = await _repository.GetCabinet();
+            var unitCabinets = await _repository.GetCabinet(storeId, cabinetId);
 
             var cabinetResponses = unitCabinets
             .GroupBy(uc => uc.CabinetId)

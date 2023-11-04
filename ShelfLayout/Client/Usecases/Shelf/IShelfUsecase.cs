@@ -7,6 +7,6 @@ namespace ShelfLayout.Client.Usecases.Shelf
     {
         IPropertyObservable<CabinetView> Cabinet { get; }
 
-        Task GetAsync();
+        Task GetAsync(int storeId, int cabinetId);
     }
 }
