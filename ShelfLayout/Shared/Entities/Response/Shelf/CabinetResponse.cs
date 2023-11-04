@@ -12,6 +12,6 @@ namespace ShelfLayout.Shared.Entities.Response.Shelf
 
         public decimal PositionZ { get; set; }
 
-        public List<LaneResponse> Lanes { get; set; }
+        public List<LaneResponse> Lanes { get; set; } = new List<LaneResponse>();
     }
 }

@@ -1,5 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using ShelfLayout.Server.Repositorys.Shelf;
+﻿using ShelfLayout.Server.Repositorys.Shelf;
+using ShelfLayout.Shared.Entities.Response;
 using ShelfLayout.Shared.Entities.Response.Shelf;
 
 namespace ShelfLayout.Server.Usecases.Shelf
@@ -15,22 +15,40 @@ namespace ShelfLayout.Server.Usecases.Shelf
 
         public async Task<List<CabinetResponse>> GetCabinet()
         {
-            var cabinets = await _repository.GetCabinet();
+            var unitCabinets = await _repository.GetCabinet();
 
-            var cabinetsResponses = new List<CabinetResponse>();
-            //autoMapperを使用するべき
-            cabinets.ForEach(x =>
+            var cabinetResponses = unitCabinets
+            .GroupBy(uc => uc.CabinetId)
+            .Select(cg => new CabinetResponse
             {
-                var cabinetsResponse = new CabinetResponse()
-                {
-                    //Id = x.Id,
-                    //PositionX = x.PositionX,
-                    //PositionY = x.PositionY,
-                    //PositionZ = x.PositionZ,
-                };
-                cabinetsResponses.Add(cabinetsResponse);
-            });
-            return cabinetsResponses;
+                Id = cg.Key,
+                PositionX = cg.First().CabinetPositionX,
+                PositionY = cg.First().CabinetPositionY,
+                PositionZ = cg.First().CabinetPositionZ,
+                Lanes = cg
+                    .GroupBy(l => l.CabinetRowLaneId)
+                    .Select(lg => new LaneResponse
+                    {
+                        Id = lg.Key,
+                        RowNumber = lg.First().RowNum,
+                        RowPositionZ = lg.First().RowPositionZ,
+                        RowSizeZ = lg.First().RowSizeZ,
+                        LaneNumber = lg.First().LaneNum,
+                        Quantity = lg.First().Quantity,
+                        Product = new ProductResponse
+                        {
+                            JanCode = lg.First().JanCode,
+                            Name = lg.First().ProductName,
+                            Volume = lg.First().ProductVolume,
+                            SizeX = lg.First().ProductSizeX,
+                            SizeY = lg.First().ProductSizeY,
+                            SizeZ = lg.First().ProductSizeZ,
+                            ImageUrl = lg.First().ProductImageUrl
+                        }
+                    }).ToList()
+            }).ToList();
+
+            return cabinetResponses;
         }
     }
 }
