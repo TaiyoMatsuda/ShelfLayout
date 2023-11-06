@@ -13,7 +13,7 @@ namespace ShelfLayout.Client.Gateway.Shelf
             _httpClient = httpClient;
         }
 
-        public async Task<List<CabinetResponse>> GetAsync(int storeId, int cabinetId)
+        public async Task<CabinetResponse> GetAsync(int storeId, int cabinetId)
         {
             var res = await _httpClient.GetAsync($"api/shelf?storeId={storeId}&cabinetId={cabinetId}");
             if (res.IsSuccessStatusCode)
@@ -25,7 +25,7 @@ namespace ShelfLayout.Client.Gateway.Shelf
                     NumberHandling = JsonNumberHandling.AllowReadingFromString | JsonNumberHandling.WriteAsString
                 };
                 
-                return JsonSerializer.Deserialize<List<CabinetResponse>>(jsonString,options) ?? new List<CabinetResponse>();
+                return JsonSerializer.Deserialize<CabinetResponse>(jsonString,options) ?? new CabinetResponse();
             }
             else
             {

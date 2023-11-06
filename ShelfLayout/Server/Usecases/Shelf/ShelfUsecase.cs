@@ -13,7 +13,7 @@ namespace ShelfLayout.Server.Usecases.Shelf
             _repository = repository;
         }
 
-        public async Task<List<CabinetResponse>> GetCabinet(int storeId, int cabinetId)
+        public async Task<CabinetResponse> GetCabinet(int storeId, int cabinetId)
         {
             var unitCabinets = await _repository.GetCabinet(storeId, cabinetId);
 
@@ -48,7 +48,7 @@ namespace ShelfLayout.Server.Usecases.Shelf
                     }).ToList()
             }).ToList();
 
-            return cabinetResponses;
+            return cabinetResponses.Single();
         }
     }
 }

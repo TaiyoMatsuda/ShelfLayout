@@ -20,9 +20,9 @@ namespace ShelfLayout.Client.Presenters.Shelf
 
             _cabinet = new(new());
 
-            var disposable = _usecase.Cabinet.Subscribe((num) =>
+            var disposable = _usecase.Cabinet.Subscribe((cabinet) =>
             {
-                _cabinet.Notify(num);
+                _cabinet.Notify(cabinet);
             });
 
             _disposables.Add(disposable);

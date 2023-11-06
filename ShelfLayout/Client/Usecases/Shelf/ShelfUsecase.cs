@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using ShelfLayout.Client.Gateway.Shelf;
 using ShelfLayout.Shared.Entities.Observable;
-using ShelfLayout.Shared.Entities.Response.Shelf;
 using ShelfLayout.Shared.Entities.View.ShelfLayout;
 using ShelfLayout.Shared.Profiles;
 
@@ -30,12 +29,7 @@ namespace ShelfLayout.Client.Usecases.Shelf
 
         public async Task GetAsync(int storeId, int cabinetId)
         {
-            var cabinets = await _gateway.GetAsync(storeId, cabinetId);
-            var cabinet = cabinets.FirstOrDefault();
-            if (cabinet == null)
-            {
-                cabinet = new CabinetResponse();
-            }
+            var cabinet = await _gateway.GetAsync(storeId, cabinetId);
             var result = _mapper.Map<CabinetView>(cabinet);
             _cabinet.Notify(result);
         }

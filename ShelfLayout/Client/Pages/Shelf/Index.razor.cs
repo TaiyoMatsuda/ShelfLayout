@@ -8,7 +8,7 @@ namespace ShelfLayout.Client.Pages.Shelf
 {
     public partial class Index
     {
-        private CabinetView _cabinet { get; set; }
+        private CabinetView _cabinet { get; set; } = new CabinetView();
 
         private DisposableList _disposables = new();
 

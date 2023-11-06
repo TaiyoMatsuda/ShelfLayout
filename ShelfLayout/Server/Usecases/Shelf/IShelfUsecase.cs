@@ -1,10 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using ShelfLayout.Shared.Entities.Response.Shelf;
+﻿using ShelfLayout.Shared.Entities.Response.Shelf;
 
 namespace ShelfLayout.Server.Usecases.Shelf
 {
     public interface IShelfUsecase
     {
-        Task<List<CabinetResponse>> GetCabinet(int storeId, int cabinetId);
+        Task<CabinetResponse> GetCabinet(int storeId, int cabinetId);
     }
 }
