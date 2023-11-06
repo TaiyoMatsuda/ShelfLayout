@@ -8,6 +8,6 @@ namespace ShelfLayout.Shared.Entities.View.Shelf
         public short LaneNum { get; set; }
         public short Quantity { get; set; }
         public decimal PositionX { get; set; }
-        public ProductResponse Product { get; set; } = new ProductResponse();
+        public ProductView Product { get; set; } = new ProductView();
     }
 }

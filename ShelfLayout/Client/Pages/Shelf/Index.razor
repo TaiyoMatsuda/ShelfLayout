@@ -3,16 +3,18 @@
 <PageTitle>Index</PageTitle>
 
 <MudGrid>
-    <MudItem xs="12" md="6" Class="d-flex justify-center align-center" Style="height:500px;">
-        <MudGrid Justify="justification">
-            <MudItem xs="12" md="10">
-                <MudGrid>
-                    @for(int i = 0; i < 4; i++)
+    <MudItem xs="12" md="6" Class="d-flex justify-center align-center">
+        <MudGrid>
+            <MudItem xs="12" md="10" >
+                <MudGrid Style="width: 70%; margin: auto; background:#d3d3d3;">
+                    @foreach(var row in _cabinet.Rows)
                     {
-                        @for (int j = 0; j < 6; j++)
+                        @foreach(var lane in row.CabinetLanes)
                         {
                             <MudItem xs="12" md="2">
-                                <div @onclick="@UpdateBreaks" class="clickable-square" css="background=gray"></div>
+                                <div class="image-container">
+                                    <MudImage src=@lane.Product.ImageUrl @onclick="() => UpdateBreaks(lane)" class="clickable-square" />
+                                </div>
                             </MudItem>
                         }
                     }
@@ -20,24 +22,43 @@
             </MudItem>
             <MudItem xs="12" md="2">
                 <MudGrid>
-                    <MudPaper Class="d-flex flex-column align-center justify-center mud-width-full py-8">
+                    @*<MudPaper Class="d-flex flex-column align-center justify-center mud-width-full py-8">
                         
-                    </MudPaper>
+                    </MudPaper>*@
                 </MudGrid>
             </MudItem>
         </MudGrid>
     </MudItem>
     <MudItem xs="12" md="6">
-        <MudPaper Class="pa-4 mt-6 mt-lg-16" Elevation="0">
-        </MudPaper>
+        <MudStack Row="true">
+            <MudImage src="@_selectedLane.Product.ImageUrl" />
+            <MudStack Justify="Justify.Center" Spacing="0">
+                <MudField Label="JanCode" Variant="Variant.Text">@_selectedLane.Product.JanCode</MudField>
+                <MudField Label="ProductName" Variant="Variant.Text">@_selectedLane.Product.Name</MudField>
+                <MudField Label="Volume" Variant="Variant.Text">@_selectedLane.Product.Volume</MudField>
+                <MudField Label="SizeX" Variant="Variant.Text">@_selectedLane.Product.SizeX</MudField>
+                <MudField Label="SizeY" Variant="Variant.Text">@_selectedLane.Product.SizeY</MudField>
+                <MudField Label="SizeZ" Variant="Variant.Text">@_selectedLane.Product.SizeZ</MudField>
+                <MudField Label="Quantity" Variant="Variant.Text">@_selectedLane.Quantity</MudField>
+                <MudButton Variant="Variant.Filled" Color="Color.Primary">Set up</MudButton>
+            </MudStack>
+        </MudStack>
     </MudItem>
 </MudGrid>
 
 <style>
     .clickable-square {
         width: 100%;
-        height: 100px;
         background-color: #d3d3d3; 
         cursor: pointer;
+    }
+
+    .image-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        align-items: center;
+        height: 100%;
+        overflow: hidden;
     }
 </style>
