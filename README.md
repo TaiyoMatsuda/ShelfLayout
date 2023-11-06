@@ -13,7 +13,10 @@ To set up Docker Compose for debugging in Visual Studio, follow these steps:
 
 1. Open the solution in Visual Studio.
 2. Right-click on the docker-compose project in Solution Explorer and select 'Set StartUp Projects'.
-3. Ensure the Docker Desktop is running.
+3. Right-click on the docker-compose project in Solution Explorer and select 'Build'.
+4. Right-click on the docker-compose project in Solution Explorer and select 'Compose Up'.
+5. Ensure the Docker Desktop is running.
+6. Execute 'docker exec sqlserver /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P saPassword1234 -i /initdb/init-db.sql'.
 
 ## Debugging with Docker Compose
 
