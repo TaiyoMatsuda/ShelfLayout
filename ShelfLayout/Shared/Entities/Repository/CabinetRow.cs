@@ -1,6 +1,4 @@
-﻿using ShelfLayout.Shared.Entities.View.Shelf;
-
-namespace ShelfLayout.Shared.Entities.Repository
+﻿namespace ShelfLayout.Shared.Entities.Repository
 {
     public class CabinetRow
     {

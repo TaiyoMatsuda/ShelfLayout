@@ -8,7 +8,7 @@
 
         public short LaneNum { get; set; }
 
-        public string JanCode { get; set; }
+        public string JanCode { get; set; } = string.Empty;
         public short Quantity { get; set; }
 
         public decimal PositionX { get; set; }
@@ -17,8 +17,8 @@
 
         public DateTime ModifiedAt { get; set; }
 
-        public string CreatedBy { get; set; }
+        public string CreatedBy { get; set; } = string.Empty;
 
-        public string ModifiedBy { get; set; }
+        public string ModifiedBy { get; set; } = string.Empty;
     }
 }

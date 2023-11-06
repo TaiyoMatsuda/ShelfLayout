@@ -18,35 +18,40 @@ namespace ShelfLayout.Server.Usecases.Shelf
             var unitCabinets = await _repository.GetCabinet(storeId, cabinetId);
 
             var cabinetResponses = unitCabinets
-            .GroupBy(uc => uc.CabinetId)
-            .Select(cg => new CabinetResponse
-            {
-                Id = cg.Key,
-                PositionX = cg.First().CabinetPositionX,
-                PositionY = cg.First().CabinetPositionY,
-                PositionZ = cg.First().CabinetPositionZ,
-                Lanes = cg
-                    .GroupBy(l => l.CabinetRowLaneId)
-                    .Select(lg => new LaneResponse
-                    {
-                        Id = lg.Key,
-                        RowNumber = lg.First().RowNum,
-                        RowPositionZ = lg.First().RowPositionZ,
-                        RowSizeZ = lg.First().RowSizeZ,
-                        LaneNumber = lg.First().LaneNum,
-                        Quantity = lg.First().Quantity,
-                        Product = new ProductResponse
+                .GroupBy(uc => uc.CabinetId)
+                .Select(cg => new CabinetResponse
+                {
+                    Id = cg.Key,
+                    PositionX = cg.First().CabinetPositionX,
+                    PositionY = cg.First().CabinetPositionY,
+                    PositionZ = cg.First().CabinetPositionZ,
+                    Rows = cg.GroupBy(row => row.CabinetRowId)
+                        .Select(rg => new CabinetRowResponse
                         {
-                            JanCode = lg.First().JanCode,
-                            Name = lg.First().ProductName,
-                            Volume = lg.First().ProductVolume,
-                            SizeX = lg.First().ProductSizeX,
-                            SizeY = lg.First().ProductSizeY,
-                            SizeZ = lg.First().ProductSizeZ,
-                            ImageUrl = lg.First().ProductImageUrl
-                        }
-                    }).ToList()
-            }).ToList();
+                            Id = rg.Key,
+                            RowNum = rg.First().RowNum,
+                            PositionZ = rg.First().RowPositionZ,
+                            SizeZ = rg.First().RowSizeZ,
+                            CabinetLanes = rg.GroupBy(lane => lane.CabinetRowLaneId)
+                                .Select(lg => new CabinetRowLaneResponse
+                                {
+                                    Id = lg.Key,
+                                    LaneNum = lg.First().LaneNum,
+                                    Quantity = lg.First().Quantity,
+                                    PositionX = lg.First().CabinetRowLanePositionX,
+                                    Product = new ProductResponse
+                                    {
+                                        JanCode = lg.First().JanCode,
+                                        Name = lg.First().ProductName,
+                                        Volume = lg.First().ProductVolume,
+                                        SizeX = lg.First().ProductSizeX,
+                                        SizeY = lg.First().ProductSizeY,
+                                        SizeZ = lg.First().ProductSizeZ,
+                                        ImageUrl = lg.First().ProductImageUrl
+                                    }
+                                }).ToList()
+                        }).ToList()
+                }).ToList();
 
             return cabinetResponses.Single();
         }

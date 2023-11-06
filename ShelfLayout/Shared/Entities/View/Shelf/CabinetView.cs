@@ -12,6 +12,6 @@ namespace ShelfLayout.Shared.Entities.View.ShelfLayout
 
         public decimal PositionZ { get; set; }
 
-        public List<LaneView> Lanes { get; set; } = new List<LaneView>();
+        public List<CabinetRowView> Rows { get; set; } = new List<CabinetRowView>();
     }
 }

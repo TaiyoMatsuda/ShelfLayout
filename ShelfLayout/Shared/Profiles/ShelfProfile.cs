@@ -12,7 +12,8 @@ namespace ShelfLayout.Shared.Profiles
         public ShelfProfile()
         {
             CreateMap<CabinetResponse, CabinetView>();
-            CreateMap<LaneResponse, LaneView>();
+            CreateMap<CabinetRowResponse, CabinetRowView>();
+            CreateMap<CabinetRowLaneResponse, CabinetRowLaneView>();
             CreateMap<ProductResponse, ProductView>();
         }
     }
